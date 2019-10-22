@@ -4,8 +4,8 @@
 
  Devs:
  
- >Erickson Moura de Lima
- >Márcio Tenório Júnior
+ *Erickson Moura de Lima*
+ *Márcio Tenório Júnior*
  
  ***Como Comprimir:***
  
