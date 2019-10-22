@@ -1,8 +1,8 @@
 package br.com.imd.edb2.Huffman_Code.Coding;
 
 
-import br.com.imd.edb2.nataly.datesStructure.Heap;
-import br.com.imd.edb2.nataly.datesStructure.Node;
+import br.com.imd.edb2.Huffman_Code.Coding.Compressor.Heap;
+import br.com.imd.edb2.Huffman_Code.Coding.Compressor.Node;
 
 import java.io.*;
 import java.util.*;
