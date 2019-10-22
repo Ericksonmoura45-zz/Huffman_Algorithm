@@ -1,0 +1,2 @@
+// para extract: java -jav projeto.jar ComprimirArquivo "local aquivo binario" "local arquivo de chave" "local e novo nome aquivo de texto"
+// para comprimir: java -jav projeto.jar DescomprimirArquivo "local do aquivo de texto" "local e novo nome para aquivo binario" "local e novo nome para arquivo de chave"
