@@ -3,8 +3,7 @@
  ### Estrutura de Dados Básicas II - IMD - UFRN - 2019.2
 
  *Alunos:*
-  Erickson Moura de Lima
-  Márcio Tenório Júnior
+  Erickson Moura de Lima | Márcio Tenório Júnior
  
  ***Como Comprimir:***
  
