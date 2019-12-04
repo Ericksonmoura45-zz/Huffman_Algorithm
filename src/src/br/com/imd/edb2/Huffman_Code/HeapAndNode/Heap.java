@@ -4,20 +4,20 @@ import java.util.Arrays;
 
 public class Heap {
     private Node[] node;
-    private int tamanho;
-    private int capacidade;
+    private int size;
+    private int capacity;
 
     public Heap() {
-        this.capacidade = 0;
-        this.tamanho = 0;
-        node = new Node[capacidade];
+        this.capacity = 10;
+        this.size = 0;
+        node = new Node[capacity];
     }
 
     public void insert(Node no) {
-        GCapacidade();
-        node[getTamanho()] = no;
-        heapifyUp(getTamanho());
-        tamanho++;
+        ensureCapacity();
+        node[getSize()] = no;
+        heapifyUp(getSize());
+        size++;
     }
 
     private void heapifyUp(int index) {
@@ -42,55 +42,55 @@ public class Heap {
         return (int) Math.floor((index - 1) / 2);
     }
 
-    private void GCapacidade() {
-        if (tamanho == capacidade) {
-            node = Arrays.copyOf(node, capacidade * 2);
-            capacidade = capacidade * 2;
+    private void ensureCapacity() {
+        if (size == capacity) {
+            node = Arrays.copyOf(node, capacity * 2);
+            capacity = capacity * 2;
         }
     }
 
-    public int getTamanho() {
+    public int getSize() {
 
-        return tamanho;
+        return size;
     }
 
     public Node peek() {
-        if (getTamanho() == 0) {
+        if (getSize() == 0) {
             return null;
         }
         return node[0];
     }
 
     public void remove() {
-        node[0] = node[getTamanho() - 1];
-        node[getTamanho() - 1] = null;
-        tamanho--;
+        node[0] = node[getSize() - 1];
+        node[getSize() - 1] = null;
+        size--;
         heapifyDown(0);
     }
 
     private void heapifyDown(int index) {
-        int filhoEsquerdo = index * 2 + 1;
-        int filhoDireito = index * 2 + 2;
+        int leftChild = index * 2 + 1;
+        int rightChild = index * 2 + 2;
 
         int childIndex = -1;
-        if (filhoEsquerdo < getTamanho()) {
-            childIndex = filhoEsquerdo;
+        if (leftChild < getSize()) {
+            childIndex = leftChild;
         }
 
         if (childIndex == -1) {
             return;
         }
 
-        if (filhoDireito < getTamanho()) {
-            if (node[filhoDireito].getQuantidade() < node[filhoEsquerdo].getQuantidade()) {
-                childIndex = filhoDireito;
+        if (rightChild < getSize()) {
+            if (node[rightChild].getQuantity() < node[leftChild].getQuantity()) {
+                childIndex = rightChild;
             }
         }
 
-        if (node[index].getQuantidade() > node[childIndex].getQuantidade()) {
-            Node temp = node[index];
+        if (node[index].getQuantity() > node[childIndex].getQuantity()) {
+            Node tmp = node[index];
             node[index] = node[childIndex];
-            node[childIndex] = temp;
+            node[childIndex] = tmp;
             heapifyDown(childIndex);
         }
     }

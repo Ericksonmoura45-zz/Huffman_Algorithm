@@ -10,25 +10,25 @@ import java.util.*;
 public class Compressor {
 
     private Heap heap = new Heap();
-    private static String tabelaCodigo = "";
-    private boolean key = true;
-    private Map <Character, String> bin = new HashMap<>();
     private Map <Integer, Integer> map = new HashMap<>();
+    private boolean key = true;
     private Node tree = new Node();
-    private String texto, palavras, dicionario;
+    private Map <Character, String> binary = new HashMap<>();
+    private String text, message, dictionary;
+    private static String tableCode = "";
 
-    public Compressor(String texto, String palavras, String dicionario) {
-        this.texto = texto;
-        this.palavras = palavras;
-        this.dicionario = dicionario;
+    public Compressor(String text, String message, String dictionary) {
+        this.text = text;
+        this.message = message;
+        this.dictionary = dictionary;
     }
 
-    public void criaDicionario() {
+    public void  createDictionary() {
 
         try {
-            FileInputStream meta = new FileInputStream(texto);
+            FileInputStream f = new FileInputStream(text); 
 
-            BufferedInputStream reader = new BufferedInputStream(meta);
+            BufferedInputStream reader = new BufferedInputStream(f);
 
             byte line[] = reader.readAllBytes();
             String file = new String(line, "UTF8");
@@ -62,9 +62,9 @@ public class Compressor {
             Node left = heap.peek();
             heap.remove();
             
-            Node direita = heap.peek();
+            Node right = heap.peek();
             heap.remove();
-            tree = new Node(esquerda.getQuantidade() + direita.getQuantidade(), left, direita);
+            tree = new Node(left.getQuantity() + right.getQuantity(), left, right);
             
             heap.insert(tree);
 
@@ -72,42 +72,40 @@ public class Compressor {
 
     }
 
+    public void createTable() throws IOException {
 
-    public void criaTabela() throws IOException { // Responsável Por criar a(s) tabela(s)
+        String bit[] = returningBynary(tree, key);
 
-        String bit[] = retornaBinario(tree, key);
-
-        FileWriter tabelaCodigo = new FileWriter(dicionario);
+        FileWriter encodedTable = new FileWriter(dictionary);
 
         for (int i = 0; i < bit.length;) {
-            tabelaCodigo.write((char) Integer.parseInt(bit[i]) + String.valueOf((char) 351) + bit[i + 1] + String.valueOf((char)351));
-            bin.put((char) Integer.parseInt(bit[i]), bit[i + 1]);
+            encodedTable.write((char) Integer.parseInt(bit[i]) + String.valueOf((char) 351) + bit[i + 1] + String.valueOf((char)351));
+            binary.put((char) Integer.parseInt(bit[i]), bit[i + 1]);
             i += 2;
         }
-        tabelaCodigo.close();
+        encodedTable.close();
 
 
     }
 
-
-    public void CodificaTexto() throws IOException {  // Responsável por codificar o texto
+    public void textEncoded() throws IOException {
         
-        FileOutputStream nome = new FileOutputStream(palavras);
-        FileInputStream arquivo = new FileInputStream(texto);
-        BufferedInputStream leitor = new BufferedInputStream(arquivo);
+        FileOutputStream m = new FileOutputStream(message);
+        FileInputStream f = new FileInputStream(text);
+        BufferedInputStream reader = new BufferedInputStream(f);
 
         int cont = 0;
 
         BitSet bitSet = new BitSet();
 
-        byte text[] = leitor.readAllBytes();
+        byte text[] = reader.readAllBytes();
         String file = new String(text, "UTF8");
 
         for (int i = 0; i < file.length(); i++) {
 
-            if (bin.containsKey(file.charAt(i))) {
-                for (int j = 0; j < bin.get(file.charAt(i)).length(); j++) {
-                    if (bin.get(file.charAt(i)).charAt(j) == '1') {
+            if (binary.containsKey(file.charAt(i))) {
+                for (int j = 0; j < binary.get(file.charAt(i)).length(); j++) {
+                    if (binary.get(file.charAt(i)).charAt(j) == '1') {
                         bitSet.set(cont);
                     } 
                     else {
@@ -123,9 +121,9 @@ public class Compressor {
         int rest = 0;
 
         if (cont % 8 == 0) {
-            nome.write(bitSet.toByteArray());
-            nome.close();
-            arquivo.close();
+            m.write(bitSet.toByteArray());
+            m.close();
+            f.close();
         }
         else {
             rest = (int) ((1 - (((float) cont / 8) - (cont / 8))) * 8);
@@ -134,30 +132,30 @@ public class Compressor {
                 cont += 1;
 
             }
-            nome.write(bitSet.toByteArray());
-            nome.close();
-            arquivo.close();
+            m.write(bitSet.toByteArray());
+            m.close();
+            f.close();
         }
     }
 
-    public static String[] retornaBinario(Node no, boolean key) {
+    public static String[] returningBynary(Node no, boolean key) {
 
-            tabelaCodigo = retornaBinario(no, "");
-            return tabelaCodigo.split(" ");
+            tableCode = returningBynary(no, "");
+            return tableCode.split(" ");
 
 
     }
 
-    private static String retornaBinario(Node no, String codigo) {
+    private static String returningBynary(Node no, String codigo) {
         if (no.getLeft() == no.getRight()) {
-            tabelaCodigo += no.getCharacter() + " " + codigo + " " ;
-            return tabelaCodigo;
+            tableCode+= no.getCharacter() + " " + codigo + " " ;
+            return tableCode;
         }
         else {
-            retornaBinario(no.getRight(), codigo + "1");
-            retornaBinario(no.getLeft(), codigo + "0");
+            returningBynary(no.getRight(), codigo + "1");
+            returningBynary(no.getLeft(), codigo + "0");
         }
-        return tabelaCodigo;
+        return tableCode;
 
     }
 

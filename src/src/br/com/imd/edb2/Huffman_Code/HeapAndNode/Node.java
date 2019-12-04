@@ -2,59 +2,59 @@ package br.com.imd.edb2.Huffman_Code.HeapAndNode;
 
 public class Node {
 
-    private Integer caracter;
-    private Integer quantidade;
-    private Node esquerda;
-    private Node direita;
+    private Integer character;
+    private Integer quantity;
+    private Node left;
+    private Node right;
 
     public Node() {
-        this.esquerda = null;
-        this.direita = null;
+        this.left = null;
+        this.right = null;
     }
 
-    public Node(Integer cas, Integer sas) {
-        this.caracter = cas;
-        this.quantidade = sas;
-        this.esquerda = null;
-        this.direita = null;
+    public Node(Integer c, Integer x) {
+        this.character = c;
+        this.quantity = x;
+        this.left = null;
+        this.right = null;
     }
 
-    public Node(Integer aux, Node esquerda, Node direita) {
-        this.quantidade = aux;
-        this.esquerda = esquerda;
-        this.direita = direita;
+    public Node(Integer x, Node left, Node right) {
+        this.quantity = x;
+        this.left = left;
+        this.right = right;
 
     }
 
-    public Integer getCaracter() {
-        return caracter;
+    public Integer getCharacter() {
+        return character;
     }
 
-    public void setCaracter(Integer caracter) {
-        this.caracter = caracter;
+    public void setCharacter(Integer character) {
+        this.character = character;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Node getEsquerda() {
-        return esquerda;
+    public Node getLeft() {
+        return left;
     }
 
-    public void setEsquerda(Node esquerda) {
-        this.esquerda = esquerda;
+    public void setLeft(Node left) {
+        this.left = left;
     }
 
-    public Node getDireita() {
-        return direita;
+    public Node getRight() {
+        return right;
     }
 
-    public void setDireita(Node direita) {
-        this.direita = direita;
+    public void setRight(Node right) {
+        this.right = right;
     }
 }
