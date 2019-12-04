@@ -7,12 +7,12 @@
  
  ***Como Comprimir:***
  
- > java -jav projeto.jar compress <local do aquivo de texto> <local e novo nome para aquivo binario> <local e novo nome para arquivo de chave>
+ > java -jav projeto.jar compress 'local do arquivo de texto' 'local e novo nome para arquivo binario' 'local e novo nome para arquivo de chave'
   
 
 ***Como Descomprimir:***
  
- > java -jav projeto.jar compress <local aquivo binario> <local arquivo de chave> <local e novo nome aquivo de texto>
+ > java -jav projeto.jar extract 'local aquivo binario' 'local arquivo de chave' 'local e novo nome arquivo de texto'
   
 
   
